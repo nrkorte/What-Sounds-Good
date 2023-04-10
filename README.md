@@ -1,4 +1,5 @@
 # What_Sounds_Good
+
 A python file that outputs what frets will sound good on a guitar based on a backing chord
 
 # Author information
@@ -12,6 +13,7 @@ Email - etroknick@gmail.com
 # About this program
 
 Purpose:
+
 This program is a very dynamic triad printer. What that mean is you will give it a chord as well as a variety of other information and it will print out a fretboard containing all of the notes that will definitely sound good with it. Of course music is very creative so these notes are nothing more than a starting place, but it's a great way to get started.
 
 How to use:
@@ -29,6 +31,7 @@ Reported Bugs:
  - No known bugs
 
 Tags:
+
 Guitar Triads
 
 Guitar Notes
