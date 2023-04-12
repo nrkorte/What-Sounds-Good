@@ -1,1 +1,4 @@
 python3 what_sounds_good.py
+
+rm -f SoundsTar.tar.gz
+tar -czvf SoundsTar.tar.gz ./what_sounds_good.py ./admin ./README.md
