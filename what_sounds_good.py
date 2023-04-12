@@ -183,10 +183,12 @@ def get_music_information():
         else:
             print("The tuning you chose does not match the number of string specified")
     slow_print("Now that we have your guitar settings specified. What chord would you like help with? Ex: c major, g# minor")
-    ch = input_checking(input("Chord: "), "Chords", chords)
+    ch = input_checking(input("Chord: "), "Chord", chords)
     return strs, frets, tune, ch
 
 def input_checking(text, prompt, arr = {}):
+    if text == "quit":
+        sys.exit()
     if text == "exit":
         return text
     con = False
@@ -237,6 +239,14 @@ def input_checking(text, prompt, arr = {}):
                     print ("Please ensure the number of frets is between 10 and 42.")
                     text = input (prompt + ": ")
                     continue
+        if prompt == "Chord":
+            if len(text.split(" ")) != 2:
+                if re.match(r"^(?P<note>[a-g](?:#|b)?)(?P<quality>major|minor)", text, flags=re.IGNORECASE):
+                    print ("did you mean to type \'", text[0:text.lower().index("m")].lower(), " ", text[text.lower().index("m"):].lower(), "\'", "?", sep="")
+                else:
+                    print (text, "is not a valid chord, please check your chord and try again")
+                text = input(prompt + ": ")
+                continue
         con = True
     return text
 
@@ -297,7 +307,7 @@ if __name__ == "__main__":
         sys.exit()
     else:
         slow_print("Welcome to my guitar lab. This platform will show you the notes of a fretboard that match any major or minor chord!")
-        slow_print("If at any time you need help, type \"help\"")
+        slow_print("If at any time you need help, type \"help\" and to terminate the program type \"quit\"")
         strs, frets, tune, ch = get_music_information()
 
     g = guitar(str(tune), int(strs), int(frets) + 1)
@@ -305,6 +315,13 @@ if __name__ == "__main__":
     table= build_guitar_table(g, c)
     print ("The fret board for a guitar in", g.tuning, "over the chord", c.name, "is below.", "The notes in the chord are", chords.get(c.name), "\n\n")
     print_guitar(table)
+    con = False
+    while not con:
+        ch = input_checking(input("Chord: "), "Chord", chords)
+        c = chord(str(ch.split(" ")[0]), str(ch.split(" ")[1]))
+        table= build_guitar_table(g, c)
+        print ("The fret board for a guitar in", g.tuning, "over the chord", c.name, "is below.", "The notes in the chord are", chords.get(c.name), "\n\n")
+        print_guitar(table)
     print()
 
     
